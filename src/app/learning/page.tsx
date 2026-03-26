@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MaterialIcon } from "@/components/ui/MaterialIcon";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { readDailyMetrics, summarizeEvents, getMetricsRange } from "@/lib/parsers/metrics-parser";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ async function readPatterns(projectRoot: string): Promise<string | null> {
 }
 
 export default async function LearningPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
   const patterns = await readPatterns(projectRoot);
   const trend = await getMetricsRange(projectRoot, 7);
   const hasData = trend.some((t) => t.summary.totalEvents > 0);

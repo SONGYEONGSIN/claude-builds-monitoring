@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import { join } from "path";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MaterialIcon } from "@/components/ui/MaterialIcon";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 
 export const dynamic = "force-dynamic";
 
@@ -22,7 +22,7 @@ async function readRuleFile(projectRoot: string, filename: string): Promise<stri
 }
 
 export default async function RulesPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
 
   const rulesWithContent = await Promise.all(
     RULES.map(async (rule) => ({

@@ -1,5 +1,5 @@
 import { LogTable } from "@/components/logs/LogTable";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { readDailyMetrics } from "@/lib/parsers/metrics-parser";
 import { listSessionLogs } from "@/lib/parsers/session-parser";
 import type { LogEntry } from "@/components/logs/LogRow";
@@ -7,7 +7,7 @@ import type { LogEntry } from "@/components/logs/LogRow";
 export const dynamic = "force-dynamic";
 
 export default async function LogsPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
 
   const daily = await readDailyMetrics(projectRoot);
   const sessions = await listSessionLogs(projectRoot, 20);

@@ -11,7 +11,7 @@ import { LogTable } from "@/components/logs/LogTable";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MaterialIcon } from "@/components/ui/MaterialIcon";
 import { AGENTS } from "@/lib/constants/agents";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { readDailyMetrics, summarizeEvents, getMetricsRange } from "@/lib/parsers/metrics-parser";
 import { listSessionLogs } from "@/lib/parsers/session-parser";
 import { listInboxMessages, getUnreadCounts } from "@/lib/parsers/message-parser";
@@ -37,7 +37,7 @@ async function fileExists(path: string): Promise<boolean> {
 }
 
 export default async function DashboardPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
 
   const [daily, trend, sessions, allMessages, unreadCounts] = await Promise.all([
     readDailyMetrics(projectRoot),

@@ -1,6 +1,6 @@
 import { AgentCard } from "@/components/agents/AgentCard";
 import { AGENTS } from "@/lib/constants/agents";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { getUnreadCounts, listInboxMessages } from "@/lib/parsers/message-parser";
 import type { AgentStatus, AgentStatusType } from "@/types/agent";
 
@@ -19,7 +19,7 @@ function determineStatus(
 }
 
 export default async function AgentsPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
   const unreadCounts = await getUnreadCounts(projectRoot);
   const allMessages = await listInboxMessages(projectRoot);
 

@@ -1,7 +1,7 @@
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MaterialIcon } from "@/components/ui/MaterialIcon";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { readDailyMetrics, summarizeEvents } from "@/lib/parsers/metrics-parser";
 import { readHookLogs } from "@/lib/parsers/hook-log-parser";
 
@@ -32,7 +32,7 @@ const PHASE_COLORS: Record<string, string> = {
 };
 
 export default async function HooksPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
   const daily = await readDailyMetrics(projectRoot);
   const summary = daily && daily.events.length > 0 ? summarizeEvents(daily.events) : null;
   const hookLogs = await readHookLogs();

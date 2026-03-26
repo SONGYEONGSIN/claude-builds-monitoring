@@ -1,6 +1,6 @@
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MaterialIcon } from "@/components/ui/MaterialIcon";
-import { getProjectRoot } from "@/lib/env";
+import { getSelectedProject } from "@/lib/env";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
@@ -11,7 +11,7 @@ async function safeRead(path: string): Promise<string | null> {
 }
 
 export default async function SettingsPage() {
-  const projectRoot = getProjectRoot();
+  const projectRoot = await getSelectedProject();
   const settingsJson = await safeRead(join(projectRoot, ".claude", "settings.local.json"));
   const claudeMd = await safeRead(join(projectRoot, "CLAUDE.md"));
 
