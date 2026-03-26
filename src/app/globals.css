@@ -144,6 +144,30 @@ body {
   animation: fade-in 0.2s ease-out;
 }
 
+/* ── Bus Network Animations ── */
+@keyframes particle-move {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes line-glow-pulse {
+  0%, 100% { stroke-opacity: 0.6; filter: drop-shadow(0 0 2px rgba(58, 223, 250, 0.3)); }
+  50% { stroke-opacity: 1; filter: drop-shadow(0 0 8px rgba(58, 223, 250, 0.6)); }
+}
+
+@keyframes node-select-ring {
+  0% { r: 22; stroke-opacity: 0.8; }
+  50% { r: 30; stroke-opacity: 0; }
+  100% { r: 22; stroke-opacity: 0.8; }
+}
+
+@keyframes node-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
 .data-flow-path {
   stroke-dasharray: 10;
   animation: data-flow 5s linear infinite;
